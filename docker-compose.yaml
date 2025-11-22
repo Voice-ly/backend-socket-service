@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: voicely-socket
+    ports:
+      - 3010:3010
+    environment:
+      NODE_ENV: production
