@@ -8,7 +8,6 @@ import {
 
 export class RoomService {
     private roomManager: RoomManager;
-
     constructor() {
         this.roomManager = new RoomManager();
     }
@@ -145,5 +144,21 @@ export class RoomService {
 
         const deleted = this.roomManager.deleteRoom(roomId);
         return { success: deleted };
+    }
+
+    private generateRoomId() {
+        // Para Node.js
+        if (typeof window === "undefined") {
+            const crypto = require("crypto");
+            return crypto.randomBytes(4).toString("hex").toUpperCase();
+        }
+
+        // Para navegador
+        const array = new Uint8Array(4);
+        crypto.getRandomValues(array);
+        return Array.from(array, (byte) => byte.toString(16).padStart(2, "0"))
+            .join("")
+            .toUpperCase()
+            .substring(0, 8);
     }
 }

@@ -10,6 +10,8 @@ export interface Participant {
 export interface CreateRoomData {
     name: string;
     maxParticipants?: number;
+    tittle?: string;
+    description?: string;
     createdBy: string;
 }
 
